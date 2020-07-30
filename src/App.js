@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navigation from './components/navbar';
 import UserData from './components/userdata';

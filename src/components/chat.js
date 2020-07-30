@@ -133,7 +133,7 @@ class Chat extends React.Component{
                     if(messagesArray.length > 0){
                         let arrayContains = false;
                         for(let x = 0; x < messagesArray.length; x++){
-                            if(messagesArray[x][0] == item[0]){
+                            if(messagesArray[x][0] === item[0]){
                                 arrayContains = true;
                             }
                         }
@@ -144,6 +144,7 @@ class Chat extends React.Component{
                     }else{
                         messagesArray.push(item);
                     }
+                    return null;
                 })
                 this.setState({
                     messages: messagesArray
@@ -201,7 +202,7 @@ class Chat extends React.Component{
                                     {this.state.messages.map((message, index) => {
                                         let name = "Vy";
                                         let direction = "right";
-                                        if (message[2] != context.id) {
+                                        if (message[2] !== context.id) {
                                             name = message[3];
                                             direction = "left";
                                         }

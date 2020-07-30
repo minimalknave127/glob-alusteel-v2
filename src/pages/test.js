@@ -1,5 +1,4 @@
 import React from 'react';
-import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 
 class Wtf extends React.Component{
     constructor(props){

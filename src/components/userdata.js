@@ -1,4 +1,4 @@
-import React, { Component, createContext } from 'react';
+import React, { createContext } from 'react';
 
 export const MyContext = createContext();
 

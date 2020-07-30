@@ -54,7 +54,7 @@ export const MyButton = (props) => {
    const variant = props.variant;
    let background = undefined;
    let color = undefined;
-   if(variant == "primary"){
+   if(variant === "primary"){
        background = "rgb(3,80,153)";
        color = "white";
    }
@@ -69,7 +69,7 @@ export const MySend = (props) => {
     const variant = props.variant;
     let background = undefined;
     let color = undefined;
-    if (variant == "primary") {
+    if (variant === "primary") {
         background = "rgb(3,80,153)";
         color = "white";
     }
@@ -79,7 +79,7 @@ export const MySend = (props) => {
             <SendStyles background={background} color={color}>
                 <div onClick={props.onClick} className={props.className + " send btn"}>
                     <span>{props.children}</span>
-                    <img src={require("../media/icons/send.svg")} />
+                    <img src={require("../media/icons/send.svg")} alt="Send icon" />
                 </div>
             </SendStyles>
         </ButtonStyles>

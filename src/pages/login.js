@@ -52,7 +52,7 @@ export default class Login extends React.Component{
             const url = "http://localhost:80/react-backend/login.php/";
             axios.post(url, formData)
             .then(res => {
-                if(res.data[0] == 'success'){
+                if(res.data[0] === 'success'){
                     console.log(res.data[1]);
                     this.props.handleLogin(res.data);
                 }else{

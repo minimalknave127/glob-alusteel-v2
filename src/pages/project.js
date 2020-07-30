@@ -104,7 +104,7 @@ class Project extends React.Component{
             <React.Fragment>
                 <Styles>
                     <div onClick={this.goBack} id="arrow">
-                        <img className="mr-2" src={require('../media/icons/arrow.svg')} />
+                        <img className="mr-2" src={require('../media/icons/arrow.svg')} alt="arrow" />
                         <h6>Jít zpět</h6>
                     </div>
                     <section className="order mt-5">
@@ -139,11 +139,11 @@ class Project extends React.Component{
                     {/* <section id="chat-section" className="mt-5 container">
                         <Chat orderInfo={this.state.orderData}/>
                     </section> */}
-                    {(this.state.loadedContent == "chat") ?
+                    {(this.state.loadedContent === "chat") ?
                         <section id="chat-section" className="mt-5 container">
                             <Chat orderInfo={this.state.orderData} />
                         </section>
-                        : (this.state.loadedContent == "settings") ?
+                        : (this.state.loadedContent === "settings") ?
                             <section id="chat-section" className="mt-5 container">
                                 <AdminSettings handleSettingsChange={(data) => { this.handleSettingsChange(data)}} orderData={this.state.orderData} status={this.state.orderData[6]} />
                             </section>

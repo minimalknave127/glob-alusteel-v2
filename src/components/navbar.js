@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import styled from 'styled-components';
 import { MyContext } from '../components/userdata';
 

@@ -95,9 +95,10 @@ class Share extends React.Component{
                                     if(user[0] !== userData.id.toString()){
                                         let checked = false;
                                         this.state.checkedUsers.map((arrayUser) => {
-                                            if(arrayUser.name == user[1]){
+                                            if(arrayUser.name === user[1]){
                                                 checked = true;
                                             }
+                                            return null;
                                         })
                                         return <Form.Check 
                                     type='checkbox'
@@ -113,6 +114,7 @@ class Share extends React.Component{
                                     }}
                                     />
                                     }
+                                    return null;
                                 })
                             }
 

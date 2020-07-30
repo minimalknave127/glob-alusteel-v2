@@ -1,9 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import { Button, Modal, Form, ListGroup, Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import { MyContext } from '../components/userdata';
 import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import { GetStatus } from './functions';
 import { GetDate } from './functions';
 
@@ -50,7 +49,7 @@ class ShowProjects extends React.Component{
                     if(itemsArray.length > 0){
                         let arrayContains = false;
                         for(let x = 0; x < itemsArray.length; x++){
-                            if(itemsArray[x][0] == item[0]){
+                            if(itemsArray[x][0] === item[0]){
                                 arrayContains = true;
                             }                       
                         }
@@ -60,6 +59,7 @@ class ShowProjects extends React.Component{
                     }else{
                         itemsArray.push(item);
                     }
+                    return null;
                 });
                 // console.log(itemsArray);
                 this.setState({

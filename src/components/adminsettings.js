@@ -1,6 +1,4 @@
 import React from 'react';
-import Calendar from 'react-calendar';
-import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import { Container, Alert, Button, Form } from 'react-bootstrap';
 import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
@@ -23,10 +21,13 @@ class AdminSettings extends React.Component{
         const value = data.target.value;
 
         let orderArray = this.state.order;
-        switch(type){
-            case "name":
-                orderArray[1] = value;
-            break;
+        // switch(type){
+        //     case "name":
+        //         orderArray[1] = value;
+        //     break;
+        // }
+        if(type === "name"){
+            orderArray[1] = value;
         }
         this.setState({
             order: orderArray
@@ -46,7 +47,7 @@ class AdminSettings extends React.Component{
             formData.append("key", key);
             axios.post(url, formData)
             .then(res => {
-                if(res.data == "Success"){
+                if(res.data === "Success"){
                     this.props.handleSettingsChange(this.state.order);
                 }
             })
@@ -59,16 +60,11 @@ class AdminSettings extends React.Component{
         }
     }
     componentDidMount(){
-        if(this.props.status != "0"){
+        if(this.props.status !== "0"){
             this.setState({
                 accepted: true
             });
         }
-        const wtf = this.props.orderData;
-        // this.setState({
-        //     order: this.props.order,
-        //     fuckyou: this.props.order
-        // })
         this.setState((state, props) => (
             {
                 order: [...props.orderData],

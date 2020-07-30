@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Button, Modal, Form, ListGroup, Table } from 'react-bootstrap';
+import { Button, Modal, Form, ListGroup } from 'react-bootstrap';
 import Share from '../components/share';
 import styled from 'styled-components';
 
@@ -45,11 +45,11 @@ class CreateProject extends React.Component{
         formData.append('dateTo', form.dateTo);
         // formData.append('files', form.files[0]);
         form.files.map((file) => {
-            formData.append('files[]', file)
+            return formData.append('files[]', file);
         });
         // formData.append('sharedUsers', form.sharedUsers);
         form.sharedUsers.map((user) => {
-            formData.append('sharedUsers[]', user.id);
+            return formData.append('sharedUsers[]', user.id);
         });
         formData.append('owner', this.props.user.id);
         formData.append('ownerName', this.props.user.name);
