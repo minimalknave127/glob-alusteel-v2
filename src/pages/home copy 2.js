@@ -1,0 +1,377 @@
+import React from 'react';
+import { Button, Modal, Form, ListGroup, Table } from 'react-bootstrap';
+import { MyContext } from '../components/userdata';
+import styled from 'styled-components';
+import axios from 'axios';
+
+import Share from '../components/share';
+
+
+class CreateProject extends React.Component{
+    constructor(props){
+        super(props);
+
+        this.state = {
+            formData: {
+                name: '',
+                description: '',
+                coUsers: [],
+                dateTo: '',
+                files: [],
+                sharedUsers: []
+            },
+            modalShow: false
+        }
+        this.handleFiles = this.handleFiles.bind(this);
+        this.handleDeleteFile = this.handleDeleteFile.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handlePost = this.handlePost.bind(this);
+    }
+    handlePost(){
+        const form = this.state.formData;
+        const url = "http://localhost:80/react-backend/new-project.php";
+        const key = '156165106as51da16f1ds0f121df032s10f3s49a';
+        let formData = new FormData();
+        formData.append('name', form.name);
+        formData.append('description', form.description);
+        formData.append('dateTo', form.dateTo);
+        // formData.append('files', form.files[0]);
+        form.files.map((file) => {
+            formData.append('files[]', file)
+        });
+        // formData.append('sharedUsers', form.sharedUsers);
+        form.sharedUsers.map((user) => {
+            formData.append('sharedUsers[]', user.id);
+        });
+        formData.append('owner', this.props.user.id);
+        formData.append('ownerName', this.props.user.name);
+        formData.append('key', key);
+        axios.post(url, formData)
+        .then(res => {
+            console.log(res);
+            console.log(form.sharedUsers[0].id);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+    handleShare(data){
+        this.setState((prevState) => (
+            {
+                formData:{
+                    ...prevState.formData,
+                    sharedUsers: data
+                }
+            }
+        ), () => {
+            console.log("====SHARED USERS====");
+            console.log(this.state.formData.sharedUsers);
+        })
+    }
+    handleFiles(data){
+        let files = data.target.files;
+        let fileLenght = data.target.files.length;
+        let fileArray = this.state.formData.files;
+        for(let x=0; x < fileLenght; x++){
+            fileArray.push(files[x]);
+        }
+        console.log(fileArray);
+        this.setState((prevState) => (
+            {
+                formData: {
+                    ...prevState.formData,
+                    files: fileArray
+                }
+            }
+        ), () => {
+            console.log(this.state.formData.files);
+        })
+        
+    }
+    handleDeleteFile(data){
+        document.getElementById('inputGroupFile02').value = "";
+        const fileArray = this.state.formData.files;
+        const fileArrayFiltered = fileArray.filter((file) => {
+            return file.name !== data; 
+        })
+        this.setState((prevProps) => (
+            {
+                formData:{
+                    ...prevProps.formData,
+                    files: fileArrayFiltered
+                }
+            }
+        ))
+    }
+    handleChange(data){
+        const type = data.target.id;
+        const value = data.target.value;
+        this.setState((prevState) => (
+            {
+                formData: {
+                    ...prevState.formData,
+                    [type]: value
+                }
+            }
+        ))
+    }
+    componentDidMount(){
+        console.log(this.props.id);
+    }
+    wrap = false
+    render(){
+        return(
+           <React.Fragment>
+                <Button onClick={() => {this.wrap = true; this.forceUpdate();}}>Vytvořit objednávku</Button>
+                <Modal
+                    show={this.wrap}
+                    onHide={() => {this.wrap = false; this.forceUpdate();}}
+                    dialogClassName="modal-90w"
+                    size="xl"
+                    aria-labelledby="example-custom-modal-styling-title"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title id="example-custom-modal-styling-title">
+                            Vytvořte objednávku
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group>
+                                <Form.Label>Zadejte název zakázky:</Form.Label>
+                                <Form.Control onChange={(data) => this.handleChange(data)} type="text" placeholder="Např. Argentinská..." id="name"/>
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Popište zakázku:</Form.Label>
+                                <Form.Control onChange={(data) => this.handleChange(data)} as="textarea" rows="4" id="description"/>
+                            </Form.Group>
+                            <div className="input-group mb-3">
+                                <div className="custom-file">
+                                    <input value={undefined} onChange={(files) => this.handleFiles(files)} type="file" className="custom-file-input" id="inputGroupFile02" multiple/>
+                                    <label className="custom-file-label" htmlFor="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Přidejte soubory</label>
+                                </div>
+                                <div className="input-group-append">
+                                    <span className="input-group-text" id="inputGroupFileAddon02">Upload</span>
+                                </div>
+                            </div>
+                        </Form>
+                        {(this.state.formData.files.length > 0) ? <section className="mt-5" id="files">
+                            <p>Vybrané soubory</p>
+                            <div className="card" style={{
+                                width: '80%'
+                            }}>
+                                <ul className="list-group list-group-flush">
+                                    {this.state.formData.files.map((file, index) => {
+                                        return <li style={{
+                                            width: '80%'
+                                        }} key={index} className="list-group-item">
+                                            <p className="d-inline-block">{file.name}</p>
+                                            <Button style={{
+                                                float: 'right'
+                                            }} size="sm" variant="danger" className="d-inline-block ml-5" onClick={() => this.handleDeleteFile(file.name)}>odstranit</Button>
+                                        </li>
+                                    })}
+                                </ul>
+                            </div>
+                        </section>
+                        : 
+                        null}
+                        <section className="mt-5">
+                            <Share handleShare={(data) => this.handleShare(data)}/>
+                            {(this.state.formData.sharedUsers.length == 0)? null : 
+                            <div className="mt-5 ml-4">
+                                <h3>Objednávku uvidí:</h3>
+                                <ListGroup horizontal>
+                                    {this.state.formData.sharedUsers.map((user, index) => {
+                                    return <ListGroup.Item key={index}>
+                                        <h5>{user.name}</h5>
+                                        </ListGroup.Item>
+                                    })}
+                                </ListGroup>
+                            </div>
+                            }
+                        </section>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.handlePost} variant="success">Odeslat</Button>
+                    </Modal.Footer>
+                </Modal>
+           </React.Fragment>
+        )
+    }
+}
+
+class ShowProjects extends React.Component{
+    constructor(props){
+        super(props);
+
+        this.state = {
+            loadedItems: []
+        }
+
+        this.handleLoad = this.handleLoad.bind(this);
+    }
+    static contextType = MyContext;
+    handleLoad(){
+        let formData = new FormData();
+        formData.append('userId', this.props.id);
+        const url = 'htpp://localhost:80/react-backend/loaditems.php';
+        axios.get(url, formData)
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+    componentDidMount(){
+        const loadItems = () => {
+            let formData = new FormData();
+            formData.append('userId', this.props.user.id);
+            formData.append('key', '156165106as51da16f1ds0f121df032s10f3s49a');
+            formData.append('action', 'loaditems');
+            const url = 'http://localhost:80/react-backend/loaditems.php';
+            axios.post(url, formData)
+            .then((res) => {
+                // console.log(res.data);
+                let itemsArray = this.state.loadedItems;
+                res.data.map((item) => {
+                    if(itemsArray.length > 0){
+                        let arrayContains = false;
+                        for(let x = 0; x < itemsArray.length; x++){
+                            if(itemsArray[x][0] == item[0]){
+                                arrayContains = true;
+                            }                       
+                        }
+                        if(!arrayContains){
+                            itemsArray.push(item);
+                        }
+                    }else{
+                        itemsArray.push(item);
+                    }
+                });
+                // console.log(itemsArray);
+                this.setState({
+                    loadedItems: itemsArray
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
+        loadItems();
+    }
+    componentDidUpdate(prevProps){
+        const loadItems = () => {
+            let formData = new FormData();
+            formData.append('userId', this.props.user.id);
+            formData.append('key', '156165106as51da16f1ds0f121df032s10f3s49a');
+            formData.append('action', 'loaditems');
+            const url = 'http://localhost:80/react-backend/loaditems.php';
+            axios.post(url, formData)
+            .then((res) => {
+                // console.log(res.data);
+                let itemsArray = this.state.loadedItems;
+                res.data.map((item) => {
+                    if(itemsArray.length > 0){
+                        let arrayContains = false;
+                        for(let x = 0; x < itemsArray.length; x++){
+                            if(itemsArray[x][0] == item[0]){
+                                arrayContains = true;
+                            }                       
+                        }
+                        if(!arrayContains){
+                            itemsArray.push(item);
+                        }
+                    }else{
+                        itemsArray.push(item);
+                    }
+                });
+                // console.log(itemsArray);
+                this.setState({
+                    loadedItems: itemsArray
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
+        if(prevProps.user !== this.props.user){
+            loadItems();
+            setInterval(loadItems, 2000);
+        }
+    }
+    render(){
+        return(
+            <React.Fragment>
+                <section className="mt-5 container">
+                    {(this.state.loadedItems.length > 0 ?
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>
+                                    Název objednávky
+                                </th>
+                                
+                                <th>
+                                    Stav
+                                </th>
+                                <th>
+                                    Vlastník
+                                </th>
+                                <th>
+                                    Požadované datum dokončení
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.loadedItems.map((item, index) => (
+                                <tr key={item[0]}>
+                                    <td>{item[1]}</td>
+                                    <td>{item[5]}</td>
+                                    <td>{item[5]}</td>
+                                    <td>{item[3]}</td>
+                                    <td><Button>Zjistit více</Button></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                    :
+                    <p>Nemáte žádné objednávky</p>
+                    )}
+                </section>
+            </React.Fragment>
+        )
+    }
+}
+
+class Home extends React.Component{
+    constructor(props){
+        super(props);
+
+        this.state = {
+            user: {}
+        }
+    }
+    componentDidMount(){
+        this.setState({
+            user: this.props.user
+        })
+    }
+    static contextType = MyContext;
+    render(){
+        let userData = this.context;
+        return(
+                <div>
+                    <h2>Domů</h2>
+                    <section className="pt-5">                      
+                        <CreateProject user={userData}/>
+                        <ShowProjects user={userData} />
+                    </section>
+                </div>
+        )
+    }
+}
+
+export default Home;
