@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/chat.css';
-import { MDBCol, MDBIcon, MDBInput, MDBBtn } from 'mdbreact';
+import { MDBIcon } from 'mdbreact';
 import Axios from 'axios';
 import { MyContext } from '../components/userdata';
 

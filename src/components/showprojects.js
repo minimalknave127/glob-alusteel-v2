@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Button, Table } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdbreact';
 import { MyContext } from '../components/userdata';
 import { Redirect } from 'react-router-dom';

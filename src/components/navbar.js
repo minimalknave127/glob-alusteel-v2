@@ -1,12 +1,10 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 import styled from 'styled-components';
 import { MyContext } from '../components/userdata';
 
 // css  //
 import '../css/navbar.css';
-import context from 'react-bootstrap/esm/AccordionContext';
 
 const Styles = styled.div`
     .nav-text{
@@ -67,7 +65,7 @@ const Navigation = (props) => {
                                 </div></Link>
                            <div id="nav-name">
                                 <h5 className="font-weight-bold">{myContext.name}</h5>
-                                <h6>{(myContext.premissions == "user") ? "Uživatel" : "Administrátor"}</h6>
+                                <h6>{(myContext.premissions === "user") ? "Uživatel" : "Administrátor"}</h6>
                            </div>
                            
                         </div>

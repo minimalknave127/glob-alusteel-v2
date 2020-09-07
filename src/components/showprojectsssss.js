@@ -5,7 +5,7 @@ import { MDBTable, MDBTableHead, MDBTableBody } from 'mdbreact';
 import { MyContext } from '../components/userdata';
 import { Redirect } from 'react-router-dom';
 import { GetStatus } from './functions';
-import { GetDate } from './functions';
+import { GetDate } from './functionss';
 
 class ShowProjects extends React.Component{
     constructor(props){
