@@ -3,9 +3,11 @@ import { Redirect } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import styled from 'styled-components';
 import { GetDate, GetStatus } from '../components/functions';
+import { Title } from '../style-components/style-components';
 
-import Chat from '../components/chat';
-import AdminSettings from '../components/adminsettings';
+import Chat from '../components/project/chat';
+import AdminSettings from '../components/project/adminsettings';
+import More from '../components/project/files'
 
 import { MyContext } from '../components/userdata';
 
@@ -42,7 +44,7 @@ const Styles = styled.div`
         font-weight: 500;
     }
     #chat-section{
-        width: 90%;
+        width: 100%;
         overflow: hidden;
     }
 `;
@@ -61,11 +63,19 @@ class Project extends React.Component{
         this.goBack = this.goBack.bind(this);
         this.loadPage = this.loadPage.bind(this);
         this.handleSettingsChange = this.handleSettingsChange.bind(this);
+        this.accepted = this.accepted.bind(this);
     }
     static contextType = MyContext;
     goBack(){
         this.setState({
             goBack: true
+        })
+    }
+    accepted(){
+        let orderData = this.state.orderData;
+        orderData[6] = 1;
+        this.setState({
+            orderData: orderData
         })
     }
     handleSettingsChange(data){
@@ -103,13 +113,14 @@ class Project extends React.Component{
         return(
             <React.Fragment>
                 <Styles>
+                    <Title title='Objednávky' />
                     <div onClick={this.goBack} id="arrow">
                         <img className="mr-2" src={require('../media/icons/arrow.svg')} alt="arrow" />
                         <h6>Jít zpět</h6>
                     </div>
                     <section className="order mt-5">
                         <h2>Objednávka <b>{this.state.orderData[1]}</b></h2>
-                        <div className="desc container mt-5">
+                        <div className="desc container-fluid mt-5 ml-5">
                             <div>
                                 <h5 className="nadpis color">Id objednávky</h5>
                                 <p className="popis">{this.state.orderData[0]}</p>
@@ -128,24 +139,32 @@ class Project extends React.Component{
                             </div>
                         </div>
                     </section>
-                    <Nav variant="pills" defaultActiveKey="chat" onSelect={(selected) => this.loadPage(selected)}>
+                    <Nav className="ml-5" variant="pills" defaultActiveKey="chat" onSelect={(selected) => this.loadPage(selected)}>
                         <Nav.Item>
                             <Nav.Link eventKey="chat">Chat</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link eventKey="settings">Správa</Nav.Link>
                         </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="files">Soubory</Nav.Link>
+                        </Nav.Item>
                     </Nav>
                     {/* <section id="chat-section" className="mt-5 container">
                         <Chat orderInfo={this.state.orderData}/>
                     </section> */}
                     {(this.state.loadedContent === "chat") ?
-                        <section id="chat-section" className="mt-5 container">
+                        <section id="chat-section" className="mt-5">
                             <Chat orderInfo={this.state.orderData} />
                         </section>
                         : (this.state.loadedContent === "settings") ?
-                            <section id="chat-section" className="mt-5 container">
+                            <section id="admin-settings" className="mt-5 container">
                                 <AdminSettings handleSettingsChange={(data) => { this.handleSettingsChange(data)}} orderData={this.state.orderData} status={this.state.orderData[6]} />
+                            </section>
+                            :
+                            (this.state.loadedContent === "files") ? 
+                            <section id="file-section" className="mt-5">
+                                <More  orderData={this.state.orderData} />
                             </section>
                             :
                             null

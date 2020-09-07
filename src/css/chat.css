@@ -1,0 +1,146 @@
+.chatApp {
+  width: 100%;
+  height: 50vh;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 350px auto auto;
+      grid-template-columns: 350px auto auto;
+}
+
+#chats-panel {
+  width: 350px;
+}
+
+.chat-card, .chat-card-active {
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.chat-card-active {
+  background-color: #68A5DE;
+  color: white;
+}
+
+.chat-card-img {
+  width: 55px;
+  height: 55px;
+  background-color: #035099;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 50%;
+}
+
+.chat-card-img h4 {
+  color: white;
+  padding: 0;
+  margin: 0;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.chat-card-info h5 {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.chat-card-info p {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+#app-chat {
+  background-color: white;
+  width: 100%;
+  position: relative;
+}
+
+#app-chat #bar {
+  background-color: white;
+  width: 100%;
+  height: 80px;
+}
+
+#app-chat #chat-messages {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+#app-chat #chat-messages .chat-message-left, #app-chat #chat-messages .chat-message-right {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+#app-chat #chat-messages .chat-message-left div, #app-chat #chat-messages .chat-message-right div {
+  background-color: #dddddd;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 80%;
+}
+
+#app-chat #chat-messages .chat-message-left div p, #app-chat #chat-messages .chat-message-right div p {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  word-break: break-all;
+}
+
+#app-chat #chat-messages .chat-message-right {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+#app-chat #chat-messages .chat-message-right div {
+  background-color: #68A5DE;
+  color: white;
+}
+
+#app-chat #chat-send {
+  font-weight: bold;
+}
+
+#chat-bottom-panel {
+  height: 120px;
+  background-color: white;
+}
+
+#chat-bottom-panel > div > * {
+  display: inline-block;
+}
+
+#chat-bottom-panel input {
+  width: 80%;
+}
+
+#chat-info {
+  width: 100%;
+  background-color: red;
+}
+
+#chat {
+  position: relative;
+}
+/*# sourceMappingURL=chat.css.map */

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
+import ShowUsers from '../components/users/showusers';
+import { MDBContainer } from 'mdbreact';
 
 class Users extends React.Component{
     constructor(props){
@@ -55,33 +57,8 @@ class Users extends React.Component{
         return(
             <React.Fragment>
                 <section>
-                    <h2>Registrační formulář</h2>
-                    <Form >
-                        <Form.Group>
-                            <Form.Label>Zadejte jméno:</Form.Label>
-                            <Form.Control onChange={(text) => this.handleChange(text)} type="name" id="name"/>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Zadejte email:</Form.Label>
-                            <Form.Control onChange={(text) => this.handleChange(text)} type="email" id="email" />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Zadejte heslo:</Form.Label>
-                            <Form.Control onChange={(text) => this.handleChange(text)} type="password" id="password" />
-                        </Form.Group>
-                        {/* <Form.Group>
-                            <Form.Label>Vyberte práva:</Form.Label>
-                            <Form.Control onChange={(text) => this.handleChange(text)} type="text" id="premissions" />
-                        </Form.Group> */}
-                        <Form.Group >
-                            <Form.Label>Vyberte práva</Form.Label>
-                            <Form.Control onChange={(text) => this.handleChange(text)} id="premissions" as="select">
-                                <option>Administrátor</option>
-                                <option>Uživatel</option>
-                            </Form.Control>
-                        </Form.Group>
-                        <Button className="mt-3" onClick={this.handleRegister}>Registrovat uživatele</Button>
-                    </Form>
+                    <h3 className="nadpis">Uživatelé v databázi</h3>
+                        <ShowUsers />
                 </section>
             </React.Fragment>
         )

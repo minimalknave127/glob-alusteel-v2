@@ -1,0 +1,22 @@
+.transform-enter{
+   transform: translateX(100%);
+   opacity: 0;
+}
+.transform-exit{
+   transform: translateX(0%);
+}
+.transform-enter-active{
+    transform: translateX(0%);
+   opacity: 1;
+}
+.transform-exit-active{
+   opacity: 0;
+   transform: translateX(-100%);
+}
+.transform-enter-active,
+.transform-exit-active{
+   transition: all 500ms;
+}
+/* .add-user{
+    transition: all 0.3s;
+} */

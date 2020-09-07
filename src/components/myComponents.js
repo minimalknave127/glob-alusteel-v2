@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 
 const ButtonStyles = styled.div`
        .btn, button{
@@ -83,5 +84,23 @@ export const MySend = (props) => {
                 </div>
             </SendStyles>
         </ButtonStyles>
+    )
+}
+export const Ask = (props) => {
+    let [show, setShow] = useState(props.show);
+    return(
+        <MDBContainer>
+            <MDBBtn color="primary">MDBModal</MDBBtn>
+            <MDBModal isOpen={show} centered>
+                <MDBModalHeader>MDBModal title</MDBModalHeader>
+                <MDBModalBody>
+                   {props.question}
+                </MDBModalBody>
+                <MDBModalFooter>
+                    <MDBBtn onClick={props.yes} color="success">Ano</MDBBtn>
+                    <MDBBtn onClick={props.no} color="danger">Ne</MDBBtn>
+                </MDBModalFooter>
+            </MDBModal>
+        </MDBContainer>
     )
 }

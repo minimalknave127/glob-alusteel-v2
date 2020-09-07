@@ -2,6 +2,7 @@ import React from 'react';
 import { MyContext } from '../components/userdata';
 import ShowProjects from '../components/showprojects';
 import CreateProject from '../components/createprojects';
+import { Title } from '../style-components/style-components';
 
 
 
@@ -23,7 +24,7 @@ class Orders extends React.Component{
         let userData = this.context;
         return(
                 <div>
-                    <h2>Domů</h2>
+                    <Title title='Objednávky'/>
                     <section className="pt-5">                      
                         <CreateProject user={userData}/>
                         <ShowProjects user={userData} />

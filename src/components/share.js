@@ -85,7 +85,8 @@ class Share extends React.Component{
                             // minWidth: '20%',
                             maxWidth: '80%',
                             minHeight: 200,
-                            maxHeight: '40vh'
+                            maxHeight: '40vh',
+                            zIndex: 2000
                         }}>
                         <Popover.Title as="h1">Vyberte kolegy, se kterými chcete akci sdílet</Popover.Title>
                         <Popover.Content>

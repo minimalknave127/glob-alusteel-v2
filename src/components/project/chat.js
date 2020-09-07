@@ -2,11 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { FormControl } from 'react-bootstrap';
-import { MySend } from '../components/myComponents';
-import { MyContext } from '../components/userdata';
+import { MDBBtn } from 'mdbreact';
+import { MySend } from '../../components/myComponents';
+import { MyContext } from '../../components/userdata';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
-import '../test.css';
+import '../../test.css';
 
 const Styles = styled.div`
     #chat{
@@ -62,11 +63,11 @@ const Styles = styled.div`
         margin: 0 auto;
     }
     #chat-input > *{
-        display: inline-block !important;
+        display: block !important;
         vertical-align: bottom;
     }
     .chat-textarea{
-        width: 70%;
+        width: 100%;
         overflow: auto;
         resize: none;
         height: 100px;
@@ -202,7 +203,9 @@ class Chat extends React.Component{
                                     {this.state.messages.map((message, index) => {
                                         let name = "Vy";
                                         let direction = "right";
-                                        if (message[2] !== context.id) {
+                                        if (message[2] != context.id) {
+                                            console.log(message[2]);
+                                            console.log(context.id);
                                             name = message[3];
                                             direction = "left";
                                         }
@@ -268,9 +271,9 @@ class Chat extends React.Component{
                                 </div>
                             </div> */}
                         </div>
-                        <div className="p-3" id="chat-input">
-                            <FormControl value={this.state.userMessage} onChange={(text) => this.handleChange(text)} className="chat-textarea mr-3" as="textarea"/>
-                            <MySend onClick={this.handlePost} variant="primary">Odeslat</MySend>
+                        <div className="p-5" id="chat-input">
+                            <FormControl value={this.state.userMessage} onChange={(text) => this.handleChange(text)} className="chat-textarea" as="textarea"/>
+                            <MDBBtn type="button" className="float-right" onClick={this.handlePost} gradient="blue" size="sm">Odeslat</MDBBtn>
                         </div>
                     </section>
                 </Styles>

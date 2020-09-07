@@ -1,0 +1,114 @@
+@import './colors';
+$chatHeight: 50vh;
+$chatPanelHeight: 120px;
+
+.chatApp{
+    width: 100%;
+    height: $chatHeight;
+    display: grid;
+    grid-template-columns: 350px auto;
+
+}
+#chats-panel{
+    width: 350px;
+}
+
+
+
+.chat-card{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.chat-card-active{
+    @extend .chat-card;
+    background-color: $secondaryColor;
+    color: white;
+}
+.chat-card-img{
+    width: 55px;
+    height: 55px;
+    background-color: $primaryColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    h4{
+        color: white;
+        padding: 0;
+        margin: 0;
+        font-weight: 600;
+        font-size: 18px;
+    }
+}
+.chat-card-info{
+    h5{
+        font-weight: bold;
+        font-size: 18px;
+    }
+    p{
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+    }
+}
+#app-chat{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    position: relative;
+    #bar{
+        background-color: white;
+        width: 100%;
+        height: 80px;
+    }
+    #chat-messages{
+        max-height: 50vh;
+        overflow-y: auto;
+        .chat-message-left{
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            
+            // max-width: 80%;
+            
+            div{
+                background-color: $greyColor;
+                width: fit-content;
+                max-width: 80%;
+                p{
+                    width: fit-content;
+                    word-break: break-all;
+                }
+            }
+        }
+        .chat-message-right{
+            @extend .chat-message-left;
+            justify-content: flex-end;
+            div{
+                background-color: $secondaryColor;
+                color: white;
+            }
+        }
+    }
+    #chat-send{
+        font-weight: bold;
+    }
+}
+#chat-bottom-panel{
+        height: $chatPanelHeight;
+        background-color: rgb(255, 255, 255);
+        & > div > *{
+            display: inline-block;
+        }
+        input{
+            width: 80%;
+        }
+    }
+#chat-info{
+    width: 100%;
+    background-color: red;
+}
+#chat{
+    position: relative;
+}

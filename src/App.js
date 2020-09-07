@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navigation from './components/navbar';
 import UserData from './components/userdata';
+import { MDBContainer } from 'mdbreact';
 
 /* Import pages */
 
@@ -13,6 +14,9 @@ import NotFound from './pages/notfound';
 import Orders from './pages/objednavky';
 import Project from './pages/project';
 import Test from './pages/test';
+import Dashboard from './pages/dashboard';
+import Chat from './pages/chat';
+import Testt from './pages/sweettest';
 
 class App extends React.Component{
   constructor(){
@@ -20,7 +24,7 @@ class App extends React.Component{
 
     this.state = {
       user: {
-        name: 'test',
+        name: 'Tester',
         email: 'test',
         id: 1,
         premissions: 'user'
@@ -50,20 +54,26 @@ class App extends React.Component{
         {this.state.loggedIn ? 
             <UserData user={this.state.user}>
               <Router>
-                <Navigation />
-                <div className="container mt-5 pt-5">
-                  <Switch>
-                    <Route exact path="/" component={Home}/>
-                    <Route exact path="/projekt/test" component={Test} />
-                    <Route path="/objednavky" component={Orders} />
-                    <Route path="/zpravy" component={Orders} />
-                    <Route path="/about" component={About}/>
-                    <Route path="/users" render={(props) => <Users {...props} user={this.state.user} />}/>
-                    <Route path="/projekt" component={Project}/>
-                    <Route path="/test" component={Test} />
-                    <Route component={NotFound} />
-                  </Switch>
+                <Navigation>
+                <div className="mt-5 pt-5">
+                  <MDBContainer>
+                    <Switch>
+                      <Route exact path="/" component={Home} />
+                      <Route path="/sweet" component={Testt}/>
+                      <Route exact path="/prehled" component={Dashboard} />
+                      <Route exact path="/projekt/test" component={Test} />
+                      <Route path="/objednavky" component={Orders} />
+                      <Route path="/zpravy" component={Orders} />
+                      <Route path="/about" component={About} />
+                      <Route path="/users" render={(props) => <Users {...props} user={this.state.user} />} />
+                      <Route path="/projekt" component={Project} />
+                      <Route path="/test" component={Test} />
+                      <Route path="/chat" component={Chat} />
+                      <Route component={NotFound} />
+                    </Switch>
+                  </MDBContainer>
                 </div>
+              </Navigation>
               </Router>
             </UserData>
         :

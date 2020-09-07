@@ -51,13 +51,15 @@ class CreateProject extends React.Component{
         form.sharedUsers.map((user) => {
             return formData.append('sharedUsers[]', user.id);
         });
+        form.sharedUsers.map((user) => {
+            return formData.append('sharedUsersNames[]', user.name);
+        })
         formData.append('owner', this.props.user.id);
         formData.append('ownerName', this.props.user.name);
         formData.append('key', key);
         axios.post(url, formData)
         .then(res => {
             console.log(res);
-            console.log(form.sharedUsers[0].id);
         })
         .catch(err => {
             console.log(err);
@@ -97,7 +99,7 @@ class CreateProject extends React.Component{
         
     }
     handleDeleteFile(data){
-        document.getElementById('inputGroupFile02').value = "";
+        document.getElementById('file-input').value = "";
         const fileArray = this.state.formData.files;
         const fileArrayFiltered = fileArray.filter((file) => {
             return file.name !== data; 
