@@ -160,14 +160,14 @@ class AdminSettings extends React.Component{
                 >
                     Hotovo!
                 </SweetAlert> */}
-                <MyAsk success={this.state.success} onConfirm={() => this.handleState(this.state.askState)} onCancel={() => this.setState({ askShow: false })} show={this.state.askShow}/>
+                <MyAsk action="Hello yellow" success={this.state.success} onConfirm={() => this.handleState(this.state.askState)} onCancel={() => this.setState({ askShow: false })} show={this.state.askShow}/>
                 <section className="order-settings">
                     <div className="mb-4">
                         <h4>Stav objednávky</h4>
                         <MDBBtnGroup>
-                            <MDBBtn color="success" size="lg" >Dokončit</MDBBtn>
-                            <MDBBtn color="warning" size="lg">Podržet</MDBBtn>
-                            <MDBBtn color="danger" size="lg">Zamítnout</MDBBtn>
+                            <MDBBtn color="success" size="sm" >Dokončit</MDBBtn>
+                            <MDBBtn color="warning" size="sm">Podržet</MDBBtn>
+                            <MDBBtn color="danger" size="sm">Zamítnout</MDBBtn>
                         </MDBBtnGroup>
                     </div>
                     <h4>Nastavení objednávky</h4>

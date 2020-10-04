@@ -2,6 +2,7 @@
 .navbar-container{
     width: 100%;
     margin: 0 auto;
+    background-color: white;
 }
 .navbar-link-container{
     float: right !important;
@@ -21,9 +22,15 @@
     min-height: 100vh;
     
     width: 280px;
+    background-color: white;
 }
 .items-wrapper{
     margin-top: 10vh;
+     display: flex;
+     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 }
 #nav-wrapper{
     position: fixed;
@@ -34,11 +41,22 @@
     display: grid;
     grid-template-columns: 280px auto;
 }
-.nav-item{
+.nav-item-main{
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 1rem;
+    width: 110px;
+    height: 110px;
 }
-.nav-item > img{
+.nav-item-main:hover{
+    border: 3px solid #eaf0ff;
+}
+.nav-item-main > h6{
+    text-align: center;
+}
+.nav-item-main > img{
     width: 25px;
     /* filter: brightness(0) invert(1); */
 }
@@ -57,16 +75,34 @@
     /* filter: brightness(0) invert(1); */
     width: 40%;
 }
-.nav-item{
+.nav-item-main{
+    position: relative;
     cursor: pointer;
 }
-.nav-item > h5{
+.nav-item-main > h5{
     margin: 0 !important;
 }
-.nav-item-active{
-    position: relative !important;
+.nav-item-main-active{
+    background-color: #035099;
+    box-shadow: 0px 0.4375rem 1.813rem 0px rgba(0, 0, 0, 0.246) !important;
+  -moz-box-shadow: 0px 0.4375rem 1.813rem 0px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 0px 0.4375rem 1.813rem 0px rgba(0, 0, 0, 0.08);
+  -ms-box-shadow: 0px 0.4375rem 1.813rem 0px rgba(0, 0, 0, 0.08);
+  -o-box-shadow: 0px 0.4375rem 1.813rem 0px rgba(0, 0, 0, 0.08);
+    /* position: relative !important; */
+    transition: all 0.3s;
 }
-.nav-item-active::after{
+.nav-item-main-active > h6 > a{
+    color: white !important;
+}
+.nav-item-main-active > img{
+    filter: brightness(0) invert(1) !important;
+}
+.nav-item-main-active:hover{
+    border: none !important;
+    opacity: 0.8;
+}
+/* .nav-item-active::after{
     content: "";
     position: absolute;
     top: 0;
@@ -75,7 +111,7 @@
     height: 100%;
     background-color: white;
     transform: translateX(-30px);
-}
+} */
 .nav-a {
     color: black !important;
 }
@@ -93,5 +129,13 @@
     background-color: rgb(228, 227, 227);
     min-height: calc(100vh - 155px);
 } */
+
+.link-wrap{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
 

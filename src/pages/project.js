@@ -111,7 +111,7 @@ class Project extends React.Component{
             }
         }
         return(
-            <React.Fragment>
+            <div className="myCard p-5">
                 <Styles>
                     <Title title='Objednávky' />
                     <div onClick={this.goBack} id="arrow">
@@ -170,7 +170,7 @@ class Project extends React.Component{
                             null
                     }
                 </Styles>
-            </React.Fragment>
+            </div>
         )
     }
 }

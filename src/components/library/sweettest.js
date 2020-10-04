@@ -11,12 +11,17 @@ class MyAsk extends React.Component{
 
         this.onConfirm = this.onConfirm.bind(this);
         this.onCancle = this.onCancel.bind(this);
+        this.action = this.action.bind(this);
+    }
+    action(){
+        this.actionState = this.props.action;
     }
     onConfirm(){
         this.props.onConfirm();
         // this.setState({
         //     show: true
         // })
+        console.log(this.actionState);
 
 
     }

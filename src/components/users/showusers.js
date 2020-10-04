@@ -44,10 +44,8 @@ const Styles = styled.div`
         filter: brightness(0%);
     }
     .add-user{
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        margin: 5rem;
+       float: right;
+        margin: 10px;
     }
 
 
@@ -90,13 +88,13 @@ export default class ShowUsers extends React.Component{
                            
                            <RegisterUser done={() => this.setState({ newUser: false })} />
                            :
-                                <section className="mt-5 container-fluid">
+                                <section className="mt-5 container-fluid myCard p-5">
                                     {(this.state.users.length > 0) ?
                                         this.state.users.map((user, index) => {
                                             const name = user[1];
                                             const matches = name.match(/\b(\w)/g);
                                             const iconName = matches.join('');
-                                            return <MDBCard key={index} className="rounded" style={{ width: "17rem" }}>
+                                            return <MDBCard className="z-depth-0"  key={index} style={{ width: "17rem" }}>
                                                 <div className="pfp">
                                                     <h4>{iconName}</h4>
                                                 </div>

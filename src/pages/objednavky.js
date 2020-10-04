@@ -25,7 +25,8 @@ class Orders extends React.Component{
         return(
                 <div>
                     <Title title='Objednávky'/>
-                    <section className="pt-5">                      
+                    <h4 className="mb-4">Objednávky</h4>
+                    <section className="p-5 myCard">                      
                         <CreateProject user={userData}/>
                         <ShowProjects user={userData} />
                     </section>

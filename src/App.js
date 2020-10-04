@@ -29,9 +29,18 @@ class App extends React.Component{
         id: 1,
         premissions: 'user'
       },
-      loggedIn: true
+      loggedIn: false
     }
     this.handleLogin = this.handleLogin.bind(this);
+  }
+  componentDidMount(){
+    if(localStorage.getItem('userData')){
+      const userData = localStorage.getItem('userData');
+      this.setState({
+        user: JSON.parse(userData),
+        loggedIn: true
+      })
+    }
   }
   handleLogin(data){
     this.setState({

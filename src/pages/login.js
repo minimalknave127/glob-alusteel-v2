@@ -55,6 +55,13 @@ export default class Login extends React.Component{
                 if(res.data[0] === 'success'){
                     console.log(res.data[1]);
                     this.props.handleLogin(res.data);
+                    const userObject = {
+                        name: res.data[2],
+                        email: res.data[3],
+                        id: res.data[1],
+                        premissions: res.data[4]
+                    }
+                    localStorage.setItem('userData', JSON.stringify(userObject));
                 }else{
                     console.log(res.data);
                 }

@@ -11,9 +11,10 @@ export default class Dashboard extends React.Component{
     render(){
         return(
             <React.Fragment>
+                <h3 className="mb-4">Poznámka: dashboard zatím není funkční.</h3>
                 <MDBRow>
                     <MDBCol>
-                        <MDBCard style={{ width: "100%" }}>
+                        <MDBCard className="myCard p-3" style={{ width: "100%" }}>
                             <MDBCardBody>
                                 <MDBCardTitle>Objednávek v průběhu</MDBCardTitle>
                                 <MDBCardText>
@@ -24,7 +25,7 @@ export default class Dashboard extends React.Component{
                         </MDBCard>
                     </MDBCol>
                     <MDBCol>
-                        <MDBCard style={{ width: "100%" }}>
+                        <MDBCard className="myCard p-3" style={{ width: "100%" }}>
                             <MDBCardBody>
                                 <MDBCardTitle>Dokončených objednávek</MDBCardTitle>
                                 <MDBCardText>
@@ -39,7 +40,7 @@ export default class Dashboard extends React.Component{
                         </MDBCard>
                     </MDBCol>
                     <MDBCol>
-                        <MDBCard style={{ width: "100%" }}>
+                        <MDBCard className="myCard p-3" style={{ width: "100%" }}>
                             <MDBCardBody>
                                 <MDBCardTitle>Card title</MDBCardTitle>
                                 <MDBCardText>
@@ -54,7 +55,7 @@ export default class Dashboard extends React.Component{
                 <section className="mt-5">
                     <MDBRow>
                         <MDBCol>
-                            <MDBCard style={{ width: "100%", height: 400 }}>
+                            <MDBCard className="myCard p-3" style={{ width: "100%", height: 400 }}>
                                 <MDBCardBody>
                                     <MDBCardTitle>Uživatelé</MDBCardTitle>
                                     <MDBCardText>
@@ -95,7 +96,7 @@ export default class Dashboard extends React.Component{
                             </MDBCard>
                         </MDBCol>
                         <MDBCol size="6">
-                            <MDBCard style={{ width: "100%"}}>
+                            <MDBCard className="myCard p-3" style={{ width: "100%"}}>
                                 <MDBCardBody>
                                     <MDBCardTitle>Log</MDBCardTitle>
                                     <MDBCardText>

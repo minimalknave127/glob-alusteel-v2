@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useRef } from 'react';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { MyContext } from '../components/userdata';
 
 // css  //
 import '../css/navbar.css';
+// import { NavLink } from 'react-bootstrap';
 
 const Styles = styled.div`
     .nav-text{
@@ -20,6 +21,8 @@ const Styles = styled.div`
 `;
 
 const Navigation = (props) => {
+    console.log(props.location.pathname);
+    let location = props.location.pathname;
 
     const myContext = useContext(MyContext);
     return(
@@ -31,24 +34,26 @@ const Navigation = (props) => {
                             <div className="brand-logo">
                                 <img src={require("../media/logo.svg")} alt="logo" />
                             </div>
-                            <div className=" ml-5 items-wrapper">
-                                <div className="mb-3 nav-item nav-item-active">
-                                    <img className="mr-3" src={require("../media/ui/021-news.svg")} alt="" />
-                                    <h5 className="font-weight-normal"><Link className="nav-a" to="/prehled">Přehled</Link></h5>
+                            <div className="items-wrapper">
+                                <div className={"mb-5 nav-item-main" + (location == "/prehled" ? " nav-item-main-active" : " ")}>
+                                    <img className="mb-3" src={require("../media/ui/021-news.svg")} alt="" />
+                                    <h6 className="font-weight-normal"><a className="nav-a">Přehled</a></h6>
+                                    <Link className="link-wrap" to="/prehled" ></Link>
                                 </div>
-                                <div className="mb-3 nav-item nav-item-active">
-                                    <img className="mr-3" src={require("../media/ui/021-news.svg")} alt="" />
-                                    <h5 className="font-weight-normal"><Link className="nav-a" to="/">Moje objednávky</Link></h5>
+                                <div className={"mb-5 nav-item-main" + (location == "/objednavky" ? " nav-item-main-active" : " ")}>
+                                    <img className="mb-3" src={require("../media/ui/021-news.svg")} alt="" />
+                                    <h6 className="font-weight-normal"><a className="nav-a">Moje objednávky</a></h6>
+                                    <Link className="link-wrap" to="/objednavky" ></Link>
                                 </div>
-                                <hr />
-                                <div className="mb-3 nav-item">
-                                    <img className="mr-3" src={require("../media/ui/001-account.svg")} alt="" />
-                                    <h5 className="font-weight-normal"><Link className="nav-a" to="/users">Uživatelé</Link></h5>
+                                <div className={"mb-5 nav-item-main" + (location == "/users" ? " nav-item-main-active" : " ")}>
+                                    <img className="mb-3" src={require("../media/ui/001-account.svg")} alt="" />
+                                    <h6 className="font-weight-normal"><a className="nav-a" to="/users">Uživatelé</a></h6>
+                                    <Link className="link-wrap" to="/users" ></Link>
                                 </div>
-                                <hr />
-                                <div className="mb-3 nav-item">
-                                    <img className="mr-3" src={require("../media/ui/030-settings.svg")} alt="" />
-                                    <h5 className="font-weight-normal"><Link className="nav-a" to="/settings">Nastavení</Link></h5>
+                                <div className="mb-5 nav-item-main">
+                                    <img className="mb-3" src={require("../media/ui/030-settings.svg")} alt="" />
+                                    <h6 className="font-weight-normal"><a className="nav-a">Nastavení</a></h6>
+                                    <Link className="link-wrap" to="/settings" ></Link>
                                 </div>
                             </div>
                         </div>
@@ -78,4 +83,4 @@ const Navigation = (props) => {
     </Styles>
     )
 }
-export default Navigation;
+export default withRouter(Navigation);

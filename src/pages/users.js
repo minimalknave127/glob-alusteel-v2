@@ -57,7 +57,7 @@ class Users extends React.Component{
         return(
             <React.Fragment>
                 <section>
-                    <h3 className="nadpis">Uživatelé v databázi</h3>
+                    <h4 className="mb-4">Uživatelé v databázi</h4>
                         <ShowUsers />
                 </section>
             </React.Fragment>
