@@ -22,7 +22,7 @@ class Home extends React.Component{
         return(
                 <React.Fragment>
                     {
-                        (userData.premissions === "user") ? <Redirect to="/objednavky"/> : null
+                        (userData.premissions === "") ? <Redirect to="/objednavky"/> : null
                     }
                 </React.Fragment>
         )

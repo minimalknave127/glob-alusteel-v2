@@ -101,19 +101,10 @@ class Share extends React.Component{
                                             }
                                             return null;
                                         })
-                                        return <Form.Check 
-                                    type='checkbox'
-                                    id={index}
-                                    key={index}
-                                    label={user[1]}
-                                    name={user[1]}
-                                    onChange={(box) => this.handleCheck(box)}
-                                    defaultChecked={checked}
-                                    style={{
-                                        fontSize: 20,
-                                        fontWeight: 'bold'
-                                    }}
-                                    />
+                                        return <div class="custom-control custom-checkbox">
+                                            <input defaultChecked={checked} onChange={(box) => this.handleCheck(box)} name={user[1]} type="checkbox" class="custom-control-input" id={"defaultUnchecked" + index} />
+                                            <label class="custom-control-label" for={"defaultUnchecked" + index}>{user[1]}</label>
+                                        </div>
                                     }
                                     return null;
                                 })

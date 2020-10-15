@@ -17,6 +17,8 @@ import Test from './pages/test';
 import Dashboard from './pages/dashboard';
 import Chat from './pages/chat';
 import Testt from './pages/sweettest';
+import UserProfile from './pages/profile';
+import Settings from './pages/settings';
 
 class App extends React.Component{
   constructor(){
@@ -74,10 +76,12 @@ class App extends React.Component{
                       <Route path="/objednavky" component={Orders} />
                       <Route path="/zpravy" component={Orders} />
                       <Route path="/about" component={About} />
+                      <Route exact path="/users/profile" component={UserProfile} />
                       <Route path="/users" render={(props) => <Users {...props} user={this.state.user} />} />
                       <Route path="/projekt" component={Project} />
                       <Route path="/test" component={Test} />
                       <Route path="/chat" component={Chat} />
+                      <Route path="/settings" component={Settings} />
                       <Route component={NotFound} />
                     </Switch>
                   </MDBContainer>

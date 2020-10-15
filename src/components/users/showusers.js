@@ -4,6 +4,8 @@ import { MDBBtn, MDBCard, MDBCardBody,MDBCardTitle, MDBCardText } from 'mdbreact
 import axios from 'axios';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
+import { Link } from 'react-router-dom';
+
 import RegisterUser from './createuser';
 
 import '../../css/transform-users.css';
@@ -37,7 +39,7 @@ const Styles = styled.div`
     .user-text{
         text-align: center;
     }
-    .tools > img{
+    .tools > img, .tools > a > img{
         cursor: pointer;
         width: 20px;
         margin: 0 8px;
@@ -104,7 +106,14 @@ export default class ShowUsers extends React.Component{
                                                         Admin
                                                     </MDBCardText>
                                                     <MDBCardText className="user-text tools">
-                                                        <img src={require("../../media/ui/001-account.svg")} alt="edit icon" />
+                                                        <Link to={{
+                                                            pathname: '/users/profile',
+                                                            state: {
+                                                                user: user
+                                                            }
+                                                        }}>
+                                                            <img src={require("../../media/ui/001-account.svg")} alt="edit icon" />
+                                                        </Link>
                                                         <img src={require("../../media/ui/004-chat.svg")} alt="edit icon" />
                                                         <img src={require("../../media/ui/010-edit.svg")} alt="edit icon" />
 

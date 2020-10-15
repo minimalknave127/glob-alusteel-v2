@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Button, Modal, Form, ListGroup } from 'react-bootstrap';
+import { MDBListGroup, MDBListGroupItem} from "mdbreact";
 import Share from '../components/share';
 import styled from 'styled-components';
 
@@ -195,15 +196,21 @@ class CreateProject extends React.Component{
                         <section className="mt-5">
                             <Share handleShare={(data) => this.handleShare(data)}/>
                             {(this.state.formData.sharedUsers.length === 0)? null : 
-                            <div className="mt-5 ml-4">
-                                <h3>Objednávku uvidí:</h3>
-                                <ListGroup horizontal>
-                                    {this.state.formData.sharedUsers.map((user, index) => {
-                                    return <ListGroup.Item key={index}>
-                                        <h5>{user.name}</h5>
-                                        </ListGroup.Item>
-                                    })}
-                                </ListGroup>
+                            <div>
+                                    <h6 className="mt-5">Objednávku uvidí:</h6>
+                                    <div className="mt-1 ml-4">
+
+                                        <ListGroup horizontal>
+                                            {this.state.formData.sharedUsers.map((user, index) => {
+                                                // return <MDBListGroupItem key={index}>
+                                                return <div>
+                                                    <p key={index} className="mb-0 mr-2 d-block">{user.name},</p>
+                                                    <br />
+                                                </div>
+                                                {/* </MDBListGroupItem> */ }
+                                            })}
+                                        </ListGroup>
+                                    </div>
                             </div>
                             }
                         </section>

@@ -10,7 +10,7 @@ class UserData extends React.Component{
                 name: '',
                 email: '',
                 id: '',
-                premissions: ''
+                premissions: '',
             }
         }
     }
@@ -20,6 +20,15 @@ class UserData extends React.Component{
         console.log(">>>>>>>>>>>");
         this.setState({
             user: this.props.user
+        }, () => {
+            this.setState((prevProps) => (
+                {
+                    user: {
+                        ...prevProps.user,
+                        isReady: true
+                    }
+                }
+            ))
         });
     }
     componentDidUpdate(prevProps){

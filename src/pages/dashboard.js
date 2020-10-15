@@ -17,8 +17,8 @@ export default class Dashboard extends React.Component{
                         <MDBCard className="myCard p-3" style={{ width: "100%" }}>
                             <MDBCardBody>
                                 <MDBCardTitle>Objednávek v průběhu</MDBCardTitle>
-                                <MDBCardText>
-                                    <h1>20</h1>
+                                <MDBCardText style={{fontSize: "40px"}}>
+                                    20
                             </MDBCardText>
                                 <MDBBtn href="#">Přejít na objednávky</MDBBtn>
                             </MDBCardBody>
@@ -28,13 +28,14 @@ export default class Dashboard extends React.Component{
                         <MDBCard className="myCard p-3" style={{ width: "100%" }}>
                             <MDBCardBody>
                                 <MDBCardTitle>Dokončených objednávek</MDBCardTitle>
-                                <MDBCardText>
-                                    <h1>10 z 40</h1>
+                                <MDBCardText style={{ fontSize: "40px" }}>
+                                    10 z 40
                                     
-                                    <MDBProgress value={(10 / 40) * 100} />
-                                    {(10 / 40) * 100}%
+                                    
                                     
                             </MDBCardText>
+                            <MDBProgress value={(10 / 40) * 100} />
+                                    {(10 / 40) * 100}%
                                 {/* <MDBBtn href="#">MDBBtn</MDBBtn> */}
                             </MDBCardBody>
                         </MDBCard>
@@ -113,7 +114,7 @@ export default class Dashboard extends React.Component{
                                                     <h5 className="mb-1">Nová objednávka</h5>
                                                     <small>před 3 dny</small>
                                                 </div>
-                                                <p className="mb-1">Uživatel <b>Tadeáš Simandl</b> vytvořil <a>objednávku</a></p>
+                                                <p className="mb-1">Uživatel <b>Tadeáš Simandl</b> vytvořil objednávku</p>
                                                 {/* <small>Tadeáš Simandl</small> */}
                                             </MDBListGroupItem>
                                             <MDBListGroupItem href="#">
@@ -128,6 +129,32 @@ export default class Dashboard extends React.Component{
                                     </MDBListGroup>
                                     
                                     {/* <MDBBtn href="#">MDBBtn</MDBBtn> */}
+                                </MDBCardBody>
+                            </MDBCard>
+                        </MDBCol>
+                    </MDBRow>
+                    <MDBRow className="mt-5">
+                        <MDBCol>
+                            <h4 className="mb-3">Novinky v systému:</h4>
+                            <MDBCard className="myCard p-5" style={{ width: "100%" }}>
+                                <MDBCardTitle>Co je nového?</MDBCardTitle>
+                                <MDBCardBody>
+                                    <p><b>Vylepšené vlastnosti</b></p>
+                                    <ul>
+                                        <li><p>Live chat - zprávy se nyní aktualizují v reálném čase.</p></li>
+                                        <li><p>Nový design - nová aplikace je přehlednější a modernější.</p></li>
+                                        <li><p>Detailnější správa uživatelů - nyní máte více možností úpravy uživatele.</p></li>
+                                        <li><p>Přílohy objednávky - přilohy jsou uloženy přehledně, ve své vlastní záložce "soubory".</p></li>
+                                        <li><p>Optimalizace - aplikace nyní využívá modernější technologie, které umožňují aplikaci dynamicky načítat a mazat obsah na jedné načtené stránce. Tím se aplikace několikanásobně zrychlí.</p></li>
+
+                                    </ul>
+                                    <p className="mt-5"><b>Nové vlastnosti</b></p>
+                                    <ul>
+                                        <li><p>Dashboard - systém nyní obsahuje "dashboard". Obecný přehled o systému, který vám umožní mít větší přehled o událostech.</p></li>
+                                        <li><p>Správce souborů - pokud v nové aplikaci budete chtít nahrát více souborů najednou, máte před odeslání přehled, jaké soubory jste vybrali a můžete je případně smazat.</p></li>
+                                        <li><p>Chat - ve vývoji je také chat, který vám dává možnost mezi sebou chatovat.</p></li>
+
+                                    </ul>
                                 </MDBCardBody>
                             </MDBCard>
                         </MDBCol>

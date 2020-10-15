@@ -41,6 +41,7 @@ class ShowProjects extends React.Component{
             formData.append('userId', this.context.id);
             formData.append('key', '156165106as51da16f1ds0f121df032s10f3s49a');
             formData.append('action', 'loaditems');
+            formData.append('all', this.context.premissions === 'admin' ? 'true' : 'false')
             const url = 'http://localhost:80/react-backend/loaditems.php';
             axios.post(url, formData)
             .then((res) => {

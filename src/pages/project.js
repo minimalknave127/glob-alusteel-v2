@@ -100,14 +100,17 @@ class Project extends React.Component{
             })
         }
     }
+    
     render(){
+        let myContext = this.context;
+        console.log(myContext);
         if(this.props.location.state === undefined){
-            return <Redirect to="/" />
+            return <Redirect to="/objednavky" />
         }else{
             // Do if order data passed
 
             if(this.state.goBack){
-                return <Redirect to="/"/>
+                return <Redirect to="/objednavky"/>
             }
         }
         return(
@@ -143,9 +146,13 @@ class Project extends React.Component{
                         <Nav.Item>
                             <Nav.Link eventKey="chat">Chat</Nav.Link>
                         </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="settings">Správa</Nav.Link>
-                        </Nav.Item>
+                        {(this.state.orderData[3] === myContext.id.toString() || myContext.premissions === 'admin') ?
+                            <Nav.Item>
+                                <Nav.Link eventKey="settings">Správa</Nav.Link>
+                            </Nav.Item>
+                            :
+                            null
+                        }
                         <Nav.Item>
                             <Nav.Link eventKey="files">Soubory</Nav.Link>
                         </Nav.Item>

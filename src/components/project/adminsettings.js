@@ -18,7 +18,10 @@ class AdminSettings extends React.Component{
             changed: false,
             askShow: false,
             askState: "",
-            success: undefined
+            success: undefined,
+            cancelModal: {
+                show: false
+            }
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -160,14 +163,15 @@ class AdminSettings extends React.Component{
                 >
                     Hotovo!
                 </SweetAlert> */}
-                <MyAsk action="Hello yellow" success={this.state.success} onConfirm={() => this.handleState(this.state.askState)} onCancel={() => this.setState({ askShow: false })} show={this.state.askShow}/>
+                <MyAsk action="ask" success={this.state.success} onConfirm={() => this.handleState(this.state.askState)} onCancel={() => this.setState({ askShow: false })} show={this.state.askShow}/>
+                <MyAsk action="cancel" success={this.state.success} show={this.state.cancelModal.show} onCancel={() => this.setState({cancelModal:{show: false}})} onConfirm={(response) => console.log(response) } />
                 <section className="order-settings">
                     <div className="mb-4">
                         <h4>Stav objednávky</h4>
                         <MDBBtnGroup>
                             <MDBBtn color="success" size="sm" >Dokončit</MDBBtn>
-                            <MDBBtn color="warning" size="sm">Podržet</MDBBtn>
-                            <MDBBtn color="danger" size="sm">Zamítnout</MDBBtn>
+                            <MDBBtn color="warning" size="sm">Navrhnout cenu</MDBBtn>
+                            <MDBBtn onClick={() => this.setState({ cancelModal: { show: true } })} color="danger" size="sm">Zamítnout</MDBBtn>
                         </MDBBtnGroup>
                     </div>
                     <h4>Nastavení objednávky</h4>

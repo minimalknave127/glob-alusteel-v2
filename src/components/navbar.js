@@ -35,22 +35,22 @@ const Navigation = (props) => {
                                 <img src={require("../media/logo.svg")} alt="logo" />
                             </div>
                             <div className="items-wrapper">
-                                <div className={"mb-5 nav-item-main" + (location == "/prehled" ? " nav-item-main-active" : " ")}>
+                                <div className={"mb-2 nav-item-main" + (location == "/prehled" ? " nav-item-main-active" : " ")}>
                                     <img className="mb-3" src={require("../media/ui/021-news.svg")} alt="" />
                                     <h6 className="font-weight-normal"><a className="nav-a">Přehled</a></h6>
                                     <Link className="link-wrap" to="/prehled" ></Link>
                                 </div>
-                                <div className={"mb-5 nav-item-main" + (location == "/objednavky" ? " nav-item-main-active" : " ")}>
+                                <div className={"mb-2 nav-item-main" + (location == "/objednavky" ? " nav-item-main-active" : " ")}>
                                     <img className="mb-3" src={require("../media/ui/021-news.svg")} alt="" />
                                     <h6 className="font-weight-normal"><a className="nav-a">Moje objednávky</a></h6>
                                     <Link className="link-wrap" to="/objednavky" ></Link>
                                 </div>
-                                <div className={"mb-5 nav-item-main" + (location == "/users" ? " nav-item-main-active" : " ")}>
+                                <div className={"mb-2 nav-item-main" + (location == "/users" ? " nav-item-main-active" : " ")}>
                                     <img className="mb-3" src={require("../media/ui/001-account.svg")} alt="" />
                                     <h6 className="font-weight-normal"><a className="nav-a" to="/users">Uživatelé</a></h6>
                                     <Link className="link-wrap" to="/users" ></Link>
                                 </div>
-                                <div className="mb-5 nav-item-main">
+                                <div className={"mb-2 nav-item-main" + (location == "/settings" ? " nav-item-main-active" : " ")}>
                                     <img className="mb-3" src={require("../media/ui/030-settings.svg")} alt="" />
                                     <h6 className="font-weight-normal"><a className="nav-a">Nastavení</a></h6>
                                     <Link className="link-wrap" to="/settings" ></Link>
@@ -61,7 +61,7 @@ const Navigation = (props) => {
             </div>
             <div>
                     <nav className="navbarr z-depth-1">
-                        <div className="navbar-container p-4 pr-5">
+                        <div className="navbar-container p-3 pr-5">
                             <Link to="/chat">
                                 <div>
                                     <img style={{
@@ -69,10 +69,11 @@ const Navigation = (props) => {
                                     }} src={require("../media/ui/004-chat.svg")} alt="chat icon" />
                                 </div></Link>
                            <div id="nav-name">
-                                <h5 className="font-weight-bold">{myContext.name}</h5>
-                                <h6>{(myContext.premissions === "user") ? "Uživatel" : "Administrátor"}</h6>
+                                <p className="font-weight-bold m-0">{myContext.name}</p>
+                                {/* <p>{(myContext.premissions === "user") ? "Uživatel" : "Administrátor"}</p> */}
+                                
                            </div>
-                           
+                           <p style={{cursor: 'pointer'}} className="ml-5 mb-0" onClick={() => {localStorage.clear(); window.location.reload(false);}}>Odhlásit se</p>
                         </div>
                     </nav>
                 <div id="content" className="ml-3">

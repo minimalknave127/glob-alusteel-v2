@@ -6,12 +6,15 @@ class MyAsk extends React.Component{
         super(props);
         this.state = {
             show: false,
-            showError: false
+            showError: false,
+            showCancel: false
         }
 
         this.onConfirm = this.onConfirm.bind(this);
         this.onCancle = this.onCancel.bind(this);
         this.action = this.action.bind(this);
+        this.next = this.next.bind(this);
+        this.cancelConfirm = this.cancelConfirm.bind(this);
     }
     action(){
         this.actionState = this.props.action;
@@ -24,6 +27,14 @@ class MyAsk extends React.Component{
         console.log(this.actionState);
 
 
+    }
+    next(data){
+        this.props.onCancel();
+        this.setState({ showCancel: true });
+    }
+    cancelConfirm(response){
+        this.setState({ showCancel: false });
+        this.props.onConfirm(response);
     }
     onCancel(){
         alert("hi");
@@ -45,8 +56,15 @@ class MyAsk extends React.Component{
     render(){
         return(
             <React.Fragment>
+                <SweetAlert success title="Hotovo!" show={this.state.show} onConfirm={() => this.setState({ show: false })} onCancel={this.props.onCancel}>
+                    Povedlo se!
+                </SweetAlert>
+                <SweetAlert danger title="Něco se pokazilo!" show={this.state.showError} onConfirm={() => this.setState({ showError: false })} onCancel={this.onCancel}>
+                    Kontaktujte prosím správce IT.
+                </SweetAlert>
+                {this.props.action === "ask" ? <div>
                     <SweetAlert
-                    // closeAnim={{ name: 'hideSweetAlert', duration: 100 }}
+                        // closeAnim={{ name: 'hideSweetAlert', duration: 100 }}
                         allowEscape
                         show={this.props.show}
                         warning
@@ -59,13 +77,44 @@ class MyAsk extends React.Component{
                         onCancel={this.props.onCancel}
                         focusCancelBtn
                     >
-                </SweetAlert>
-                <SweetAlert success title="Hotovo!" show={this.state.show} onConfirm={() => this.setState({ show: false })} onCancel={this.props.onCancel}>
-                    Povedlo se!
-                </SweetAlert>
-                <SweetAlert danger title="Něco se pokazilo!" show={this.state.showError} onConfirm={() => this.setState({ showError: false })} onCancel={this.onCancel}>
-                    Kontaktujte prosím správce IT.
-                </SweetAlert>
+                    </SweetAlert>
+                    
+                </div>
+                :
+                this.props.action === "cancel" ?
+                <div>
+                            <SweetAlert
+                                show={this.props.show}
+                                warning
+                                showCancel
+                                cancelBtnText="Zrušit"
+                                confirmBtnText="Provést"
+                                confirmBtnBsStyle="warning"
+                                title="Pozor!"
+                                placeHolder="Opravdu chcete objednávku stornovat?"
+                                onConfirm={this.next}
+                                onCancel={this.props.onCancel}
+                            >
+                                Opravdu chcete objednávku stornovat?
+                        </SweetAlert>
+                            <SweetAlert
+                                show={this.state.showCancel}
+                                input
+                                showCancel
+                                cancelBtnText="Zrušit"
+                                confirmBtnText="Provést"
+                                confirmBtnBsStyle="warning"
+                                title="Zadejte důvod"
+                                placeHolder="Důvod"
+                                onConfirm={(response) => this.cancelConfirm(response)}
+                                onCancel={() => this.setState({ showCancel: false })}
+                            >
+                                Zadejte důvod zrušení objednávky
+                        </SweetAlert>
+                </div>
+                        :
+                        null
+                        }
             </React.Fragment>
         )
     }

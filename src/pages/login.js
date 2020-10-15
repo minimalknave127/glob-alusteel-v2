@@ -12,6 +12,32 @@ const Styles = styled.div`
         justify-content: center;
         align-items: center;
     }
+    .formWrapper{
+        position: relative;
+        background-color: white;
+        width: 80%;
+        height: 500px;
+        display: grid;
+        grid-template-columns: auto 60%;
+        border-radius: 30px;
+        box-shadow: 0px 0.4375rem 1.813rem 0px rgba(0, 0, 0, 0.246) !important;
+        -moz-box-shadow: 0px 0.4375rem 1.813rem 0px rgba(0, 0, 0, 0.08);
+        -webkit-box-shadow: 0px 0.4375rem 1.813rem 0px rgba(0, 0, 0, 0.08);
+        -ms-box-shadow: 0px 0.4375rem 1.813rem 0px rgba(0, 0, 0, 0.08);
+        -o-box-shadow: 0px 0.4375rem 1.813rem 0px rgba(0, 0, 0, 0.08);
+
+        .loginImage{
+            transition: all 0.3s;
+            background-color: #11448F;
+            height: 100%;
+            width: 100%;
+            border-radius: 30px;
+            background-image: url(${require("../media/bg.jpg")});
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
 `;
 
 export default class Login extends React.Component{
@@ -22,11 +48,14 @@ export default class Login extends React.Component{
             formData: {
                 email: '',
                 password: ''
-            }
+            },
+            loading: false,
+            error: false
         }
 
         this.handleLogin = this.handleLogin.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleKey = this.handleKey.bind(this);
     }
     handleChange(data){
         const type = data.target.id;
@@ -44,7 +73,11 @@ export default class Login extends React.Component{
         
     }
     handleLogin(){
+        
         if(this.state.formData.email !== "" && this.state.formData.password !== ""){
+            this.setState({
+                loading: true
+            })
 
             let formData = new FormData();
             formData.append('email', this.state.formData.email);
@@ -67,29 +100,53 @@ export default class Login extends React.Component{
                 }
             })
             .catch(err => {
-                console.log(err);
+                if(err){
+                    this.setState({
+                        error: true,
+                        loading: false
+                    })
+                }
             })
 
 
             // this.props.handleLogin(this.state.formData);
         }
     }
+    handleKey(e){
+        if(e.keyCode === 13){
+            this.handleLogin();
+        }
+    }
+    componentDidMount(){
+        document.addEventListener('keydown', this.handleKey, false);
+    }
     render(){
         return(
             <Styles>
                 <Container>
                     <section className="loginSection">
-                        <Form>
-                            <Form.Group>
-                                <Form.Label>Zadejte email:</Form.Label>
-                                <Form.Control onChange={(text) => this.handleChange(text)} type="email" id="email" placeholder="Váš email..." />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Vaše heslo:</Form.Label>
-                                <Form.Control onChange={(text) => this.handleChange(text)} type="password" id="password" placeholder="Váš email..." />
-                            </Form.Group>
-                            <Button className="mt-5" variant="primary" onClick={this.handleLogin}>Potvrdit</Button>
-                        </Form>
+                        <div className="formWrapper p-3">
+                            <div className="mr-5 p-3">
+                                <h3 className="mb-5" style={{
+                                    fontWeight: 'bold'
+                                }}>Přihlaste se</h3>
+                                <Form>
+                                    <Form.Group>
+                                        <Form.Label>Zadejte email:</Form.Label>
+                                        <Form.Control onChange={(text) => this.handleChange(text)} type="email" id="email" placeholder="Váš email..." />
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Form.Label>Vaše heslo:</Form.Label>
+                                        <Form.Control onChange={(text) => this.handleChange(text)} type="password" id="password" placeholder="Váš email..." />
+                                    </Form.Group>
+                                    <Button className="mt-5 mx-0" variant="primary" onClick={this.handleLogin}>Potvrdit</Button>
+                                </Form>
+                                {this.state.loading ? <p className="mt-4">Načítání...</p> : this.state.error ? <p className="mt-4 text-danger">Chyba při kontaktování serveru</p> : null}
+                            </div>
+                            <div className="loginImage">
+
+                            </div>
+                        </div>
                     </section>
                 </Container>
             </Styles>
