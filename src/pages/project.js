@@ -59,6 +59,7 @@ class Project extends React.Component{
             goBack: false,
             loadedContent: "chat",
             changes: false,
+            checked: false
         }
 
         this.goBack = this.goBack.bind(this);
@@ -92,12 +93,27 @@ class Project extends React.Component{
         })
     }
     componentDidUpdate(){
-        let x = 0;
-        if(this.context.toggle !== false){
-            x++;
 
-            //if(this.context.id)
+        if(this.context.isReady === true && this.state.checked == false){
+            if (this.context.id === parseInt(this.state.orderData[3])){
+                if(this.state.orderData[6] !== "3"){
+                    this.setState({
+                        changes: true
+                    })
+                }
+            }else if(this.context.premissions === "Admin"){
+                if(this.state.orderData[6] === "1"){
+                    this.setState({
+                        changes: true
+                    })
+                }
+            }
 
+            this.setState({
+                checked: true
+            })
+
+            this.x++;
         }
     }
     componentDidMount(){
@@ -169,7 +185,7 @@ class Project extends React.Component{
                     </Nav>
                     {(this.state.loadedContent === "chat") ?
                         <section id="chat-section" className="mt-5">
-                            <Chat orderInfo={this.state.orderData} />
+                            <Chat changes={this.state.changes} orderInfo={this.state.orderData} />
                         </section>
                         : (this.state.loadedContent === "settings") ?
                             <section id="admin-settings" className="mt-5 container">

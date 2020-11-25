@@ -11,7 +11,8 @@ class UserData extends React.Component{
                 email: '',
                 id: '',
                 premissions: '',
-                isToggled: false
+                isToggled: false,
+                isReady: false
             }
         }
         this.toggleTheme = this.toggleTheme.bind(this);

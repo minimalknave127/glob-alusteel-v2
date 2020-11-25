@@ -176,7 +176,6 @@ class Chat extends React.Component{
             setTimeout(() => {
                 const scroll = document.getElementById('scroll-control');
                 scroll.scrollTop = scroll.scrollHeight;
-                // $("html, body").animate({ scrollTop: document.body.scrollHeight }, "slow");
             }, 50);
         }
         this.messageCheck = setInterval(this.handleLoad, 2000);
@@ -224,55 +223,9 @@ class Chat extends React.Component{
                                         </CSSTransition>
                                     })}
                                 </TransitionGroup>
-                           
-
-                            {/* //............// */}
-                            {/* <div className="chat-div mb-3">
-                                <div className="chat-top-text mb-3">
-                                    <h6>Tadeáš Simandl</h6>
-                                    <h6>1.2 | 12:00</h6>
-                                </div>
-                                <div className="chat-text">
-                                    <p>Dobrý den, dasadsakfsjda  jksdflj dsfaf asdfafafasdadasdasdasdasddsdalskf lskafjlskdf</p>
-                                </div>
-                            </div>
-                            <div className="chat-wrapper-right">
-                                <div className="chat-div right mb-3">
-                                    <div className="chat-top-text mb-3">
-                                        <h6>Vy</h6>
-                                        <h6>1.2 | 12:00</h6>
-                                    </div>
-                                    <div className="chat-text">
-                                        <p>Dobrý den, dasadsakfsjda  jksdflj dsfaf asdfafafasdadasdasdasdasddsdalskf lskafjlskdf</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div className="chat-div mb-3">
-                                    <div className="chat-top-text mb-3">
-                                        <h6>Tadeáš Simandl</h6>
-                                        <h6>1.2 | 12:00</h6>
-                                    </div>
-                                    <div className="chat-text">
-                                        <p>Dobrý den, dasadsakfsjda  jksdflj dsfaf asdfafafasdadasdasdasdasddsdalskf lskafjlskdf</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div className="chat-div mb-3">
-                                    <div className="chat-top-text mb-3">
-                                        <h6>Tadeáš Simandl</h6>
-                                        <h6>1.2 | 12:00</h6>
-                                    </div>
-                                    <div className="chat-text">
-                                        <p>Dobrý den, dasadsakfsjda  jksdflj dsfaf asdfafafasdadasdasdasdasddsdalskf lskafjlskdf</p>
-                                    </div>
-                                </div>
-                            </div> */}
                         </div>
                         <div className="p-5" id="chat-input">
-                            <FormControl value={this.state.userMessage} onChange={(text) => this.handleChange(text)} className="chat-textarea" as="textarea"/>
+                            <FormControl value={this.state.userMessage} onChange={(text) => this.handleChange(text)} className="chat-textarea" as="textarea" disabled={!this.props.changes} />
                             <MDBBtn type="button" color="primary" className="float-right" rounded onClick={this.handlePost} size="sm">Odeslat</MDBBtn>
                         </div>
                     </section>
