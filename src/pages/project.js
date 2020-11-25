@@ -57,7 +57,8 @@ class Project extends React.Component{
         this.state = {
             orderData: [],
             goBack: false,
-            loadedContent: "chat"
+            loadedContent: "chat",
+            changes: false,
         }
 
         this.goBack = this.goBack.bind(this);
@@ -89,6 +90,15 @@ class Project extends React.Component{
         }, () => {
             console.log(this.state.loadedContent);
         })
+    }
+    componentDidUpdate(){
+        let x = 0;
+        if(this.context.toggle !== false){
+            x++;
+
+            //if(this.context.id)
+
+        }
     }
     componentDidMount(){
         if(this.props.location.state !== undefined){
@@ -157,9 +167,6 @@ class Project extends React.Component{
                             <Nav.Link eventKey="files">Soubory</Nav.Link>
                         </Nav.Item>
                     </Nav>
-                    {/* <section id="chat-section" className="mt-5 container">
-                        <Chat orderInfo={this.state.orderData}/>
-                    </section> */}
                     {(this.state.loadedContent === "chat") ?
                         <section id="chat-section" className="mt-5">
                             <Chat orderInfo={this.state.orderData} />

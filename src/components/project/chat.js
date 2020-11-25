@@ -273,7 +273,7 @@ class Chat extends React.Component{
                         </div>
                         <div className="p-5" id="chat-input">
                             <FormControl value={this.state.userMessage} onChange={(text) => this.handleChange(text)} className="chat-textarea" as="textarea"/>
-                            <MDBBtn type="button" className="float-right" onClick={this.handlePost} gradient="blue" size="sm">Odeslat</MDBBtn>
+                            <MDBBtn type="button" color="primary" className="float-right" rounded onClick={this.handlePost} size="sm">Odeslat</MDBBtn>
                         </div>
                     </section>
                 </Styles>

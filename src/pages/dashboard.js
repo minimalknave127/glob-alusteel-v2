@@ -133,7 +133,7 @@ export default class Dashboard extends React.Component{
                             </MDBCard>
                         </MDBCol>
                     </MDBRow>
-                    <MDBRow className="mt-5">
+                    <MDBRow className="my-5">
                         <MDBCol>
                             <h4 className="mb-3">Novinky v systému:</h4>
                             <MDBCard className="myCard p-5" style={{ width: "100%" }}>
@@ -152,7 +152,7 @@ export default class Dashboard extends React.Component{
                                     <ul>
                                         <li><p>Dashboard - systém nyní obsahuje "dashboard". Obecný přehled o systému, který vám umožní mít větší přehled o událostech.</p></li>
                                         <li><p>Správce souborů - pokud v nové aplikaci budete chtít nahrát více souborů najednou, máte před odeslání přehled, jaké soubory jste vybrali a můžete je případně smazat.</p></li>
-                                        <li><p>Chat - ve vývoji je také chat, který vám dává možnost mezi sebou chatovat.</p></li>
+                                        <li><p>Chat - ve vývoji je také chat, který vám dává možnost mezi sebou lépe komunikovat.</p></li>
 
                                     </ul>
                                 </MDBCardBody>

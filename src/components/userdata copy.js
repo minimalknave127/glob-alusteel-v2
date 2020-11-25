@@ -11,20 +11,16 @@ class UserData extends React.Component{
                 email: '',
                 id: '',
                 premissions: '',
-                isToggled: false
             }
         }
-        this.toggleTheme = this.toggleTheme.bind(this);
+        this.testChange = this.testChange.bind(this);
     }
-    toggleTheme(name){
-        this.setState((prevProps) => (
-            {
-               user: {
-                   ...prevProps.user,
-                   name: name
-               }
-            }
-        ))
+    testChange(){
+        this.setState({
+            name: "sssssss"
+        }, () => {
+            alert("updated!");
+        })
     }
 
     componentDidMount(){
@@ -54,7 +50,7 @@ class UserData extends React.Component{
     }
     render(){
         return(
-            <MyContext.Provider value={{ ...this.state.user, toggleTheme: (name) => this.toggleTheme(name)}}>
+            <MyContext.Provider value={{ ...this.state.user, testFunction: this.testChange}}>
                 {this.props.children}
             </MyContext.Provider>
         )

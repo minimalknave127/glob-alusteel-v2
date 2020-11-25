@@ -143,9 +143,9 @@ export default class UserProfile extends React.Component{
                             </div>
                             <form>
                                 <div className="grey-text">
-                                    <MDBInput label="Jméno a přijímení*" valueDefault={user[1]} icon="user" group type="text" validate error="wrong"
+                                    <MDBInput label="Jméno a přijímení*" valueDefault={user[2]} icon="user" group type="text" validate error="wrong"
                                         success="right" id="name" onChange={(data) => this.handleChange(data.target)} />
-                                    <MDBInput label="Email*" valueDefault={user[2]} icon="envelope" group type="email" validate error="wrong"
+                                    <MDBInput label="Email*" valueDefault={user[1]} icon="envelope" group type="email" validate error="wrong"
                                         success="right" id="email" onChange={(data) => this.handleChange(data.target)}/>
                                     <MDBInput style={{ color: 'rgb(73, 80, 87)'}} label="Datum narození" valueDefault={user[5]} icon="briefcase" group type="date" validate
                                         error="wrong" success="right" id="birthDate" onChange={(data) => this.handleChange(data.target)} />

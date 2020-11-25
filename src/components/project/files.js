@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import File from '../file';
-import { MDBBtn } from 'mdbreact';
-import { CSSTransition, TransitionGroup, } from 'react-transition-group';
+import { MDBBtn, MDBSpinner, toast, ToastContainer, MDBIcon } from 'mdbreact';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import '../../css/list-animation.css';
 
 export default class More extends React.Component{
@@ -11,7 +11,8 @@ export default class More extends React.Component{
         this.state = {
             orderData: [],
             files: [],
-            newFiles: []
+            newFiles: [],
+            empty: false
         }
         
         this.loadItems = this.loadItems.bind(this);
@@ -55,10 +56,17 @@ export default class More extends React.Component{
 
         axios.post(url, formData)
         .then(res => {
+            console.log(res.data);
             if (res.data == 'success'){
                 this.setState({
                     newFiles: []
-                })
+                }, () => {
+                    toast.success(<span className="p-2"><MDBIcon className="mr-2" icon="info-circle" />Povedlo se!</span>);
+                });
+            }else if(res.data === "too big"){
+                toast.error(<span className="p-2"><MDBIcon className="mr-2" icon="exclamation-triangle" />Jeden ze souborů je přilíš velký!</span>);
+            } else if (res.data === "File format denied"){
+                toast.error(<span className="p-2"><MDBIcon className="mr-2" icon="exclamation-triangle" />Jeden z typu souborů není povolený!</span>);
             }
         })
         .catch(err => {
@@ -76,30 +84,37 @@ export default class More extends React.Component{
         .then(res => {
             console.log(res.data);
             let fileArray = this.state.files;
+            if(res.data === "empty"){
+                this.setState({
+                    empty: true
+                })
+            }else{
 
-            res.data.map((file) => {
-                if(fileArray.length > 0){
-                    let arrayContains = false;
-                    for(let i = 0; i < fileArray.length; i++){
-                        // console.log("---");
-                        // console.log(fileArray[i]);
-                        // console.log(file[0]);
-                        // console.log("---");
+                res.data.map((file) => {
+                    if (fileArray.length > 0) {
+                        let arrayContains = false;
+                        for (let i = 0; i < fileArray.length; i++) {
+                            // console.log("---");
+                            // console.log(fileArray[i]);
+                            // console.log(file[0]);
+                            // console.log("---");
 
-                        if(file[0] === fileArray[i]){
-                            arrayContains = true;
+                            if (file[0] === fileArray[i]) {
+                                arrayContains = true;
+                            }
                         }
-                    }
-                    // console.log("contains: " + arrayContains);
-                    // console.log("---");
-                    if(!arrayContains){
+                        // console.log("contains: " + arrayContains);
+                        // console.log("---");
+                        if (!arrayContains) {
+                            fileArray.unshift(file[0]);
+                        }
+                    } else {
                         fileArray.unshift(file[0]);
                     }
-                }else{
-                    fileArray.unshift(file[0]);
-                }
-                return null;
-            })
+                    return null;
+                })
+            }
+            
             this.setState({
                 files: fileArray
             })
@@ -111,9 +126,10 @@ export default class More extends React.Component{
     componentDidMount(){
         this.setState({
             orderData: this.props.orderData
+        }, () => {
+            this.loadItems();
+            this.filesInterval = setInterval(this.loadItems, 2000);
         })
-        this.filesInterval = setInterval(this.loadItems, 2000);
-        this.loadItems();
     }
     componentWillUnmount(){
         clearInterval(this.filesInterval);
@@ -121,18 +137,21 @@ export default class More extends React.Component{
     render(){
         return(
             <React.Fragment>
+                <ToastContainer
+                    hideProgressBar
+                />
                 <h4>Soubory</h4>
                 <input style={{ display: 'none' }} value={undefined} onChange={(files) => this.handleNewFiles(files)} type="file" className="file-input mt-3" id="file-input" multiple/>
                 <label style={{ cursor: 'pointer', color: '#025099', fontWeight: '700' }} htmlFor="file-input">Přidat soubory</label>
                 
                     <section id="localfiles">
-                        <TransitionGroup>{
-                            this.state.newFiles.map((file, index) => {
-                                return <CSSTransition key={index} timeout={500} classNames="file">
-                                    <File name={file.name} onCancle={() => this.deleteNewFiles(file)} add />
-                                </CSSTransition>
-                            })
-                        }</TransitionGroup>
+                            <TransitionGroup>{
+                                this.state.newFiles.map((file, index) => {
+                                    return <CSSTransition key={index} timeout={500} classNames="file">
+                                        <File name={file.name} onCancle={() => this.deleteNewFiles(file)} add />
+                                    </CSSTransition>
+                                })
+                            }</TransitionGroup>
                         {this.state.newFiles.length > 0 ?
                             <MDBBtn size='sm' onClick={this.sendNewFiles}>Potvrdit</MDBBtn>
                             :
@@ -144,10 +163,12 @@ export default class More extends React.Component{
                     <section id="files" style={{
                         display: 'flex',
                         flexWrap: 'wrap'
-                }}> <TransitionGroup style={{
-                    display: 'flex',
-                    flexWrap: 'wrap'
-                }}>
+                }}> {this.state.empty === true || this.state.files.length > 0 ? 
+                        this.state.empty === true ? <h5 className="m-5 grey-text">Zatím žádné soubory nebyly přidány.</h5>:
+                        <TransitionGroup style={{
+                            display: 'flex',
+                            flexWrap: 'wrap'
+                        }}>
                             {
                                 this.state.files.map((file, index) => {
                                     return <CSSTransition key={index} timeout={500} classNames="item">
@@ -155,7 +176,11 @@ export default class More extends React.Component{
                                     </CSSTransition>
                                 })
                             }
-                        </TransitionGroup>
+                        </TransitionGroup>:
+                        <div className="mt-5">
+                            <MDBSpinner small />
+                        </div>
+                        }
                     </section>
                 
             </React.Fragment>

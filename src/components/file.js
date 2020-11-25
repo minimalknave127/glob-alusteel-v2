@@ -7,6 +7,7 @@ export default class File extends React.Component{
     }
 
     render(){
+
         const name = this.props.name;
         const type = name.split('.').pop();
         const images = ["jpg", "jpeg", "png"];

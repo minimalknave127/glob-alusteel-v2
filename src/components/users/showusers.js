@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { MDBBtn, MDBCard, MDBCardBody,MDBCardTitle, MDBCardText } from 'mdbreact';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, toast, ToastContainer, MDBIcon } from 'mdbreact';
 import axios from 'axios';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
@@ -11,7 +11,7 @@ import RegisterUser from './createuser';
 import '../../css/transform-users.css';
 
 const Styles = styled.div`
-    section{
+    .wrapper-users{
         width: 100%;
         display: flex;
         flex-wrap: wrap;
@@ -45,11 +45,6 @@ const Styles = styled.div`
         margin: 0 8px;
         filter: brightness(0%);
     }
-    .add-user{
-       float: right;
-        margin: 10px;
-    }
-
 
 `;
 
@@ -61,6 +56,14 @@ export default class ShowUsers extends React.Component{
             newUser: false
         }
 
+        this.success = this.success.bind(this);
+    }
+    success(){
+        this.setState({
+            newUser: false
+        }, () => {
+            toast.success(<span className="p-2"><MDBIcon className="mr-2" icon="info-circle" />Povedlo se!</span>);
+        })
     }
     componentDidMount(){
         let key = new FormData();
@@ -81,6 +84,7 @@ export default class ShowUsers extends React.Component{
         return(
             <React.Fragment>
                 <Styles>
+                    <ToastContainer hideProgressBar />
                     <SwitchTransition mode="out-in">
                         <CSSTransition 
                             key={this.state.newUser} 
@@ -88,42 +92,46 @@ export default class ShowUsers extends React.Component{
                             addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}>
                            {this.state.newUser ? 
                            
-                           <RegisterUser done={() => this.setState({ newUser: false })} />
+                           <RegisterUser done={() => this.setState({ newUser: false })} success={this.success} />
                            :
                                 <section className="mt-5 container-fluid myCard p-5">
-                                    {(this.state.users.length > 0) ?
-                                        this.state.users.map((user, index) => {
-                                            const name = user[1];
-                                            const matches = name.match(/\b(\w)/g);
-                                            const iconName = matches.join('');
-                                            return <MDBCard className="z-depth-0"  key={index} style={{ width: "17rem" }}>
-                                                <div className="pfp">
-                                                    <h4>{iconName}</h4>
-                                                </div>
-                                                <MDBCardBody>
-                                                    <MDBCardTitle className="user-title">{user[1]}</MDBCardTitle>
-                                                    <MDBCardText className="user-text">
-                                                        Admin
+                                    <div>
+                                        <MDBBtn className="rounded-pill mb-5" color="primary" onClick={() => this.setState({ newUser: true })}>Přidat uživatele</MDBBtn>
+                                    </div>
+                                    <div className="wrapper-users">
+                                        {(this.state.users.length > 0) ?
+                                            this.state.users.map((user, index) => {
+                                                const name = user[2];
+                                                const matches = name.match(/\b(\w)/g);
+                                                const iconName = matches.join('');
+                                                return <MDBCard className="z-depth-0 p-4 m-3" key={index} style={{ width: "17rem" }}>
+                                                    <div className="pfp">
+                                                        <h4>{iconName}</h4>
+                                                    </div>
+                                                    <MDBCardBody>
+                                                        <MDBCardTitle className="user-title">{name}</MDBCardTitle>
+                                                        <MDBCardText className="user-text">
+                                                            Admin
                                                     </MDBCardText>
-                                                    <MDBCardText className="user-text tools">
-                                                        <Link to={{
-                                                            pathname: '/users/profile',
-                                                            state: {
-                                                                user: user
-                                                            }
-                                                        }}>
-                                                            <img src={require("../../media/ui/001-account.svg")} alt="edit icon" />
-                                                        </Link>
-                                                        <img src={require("../../media/ui/004-chat.svg")} alt="edit icon" />
-                                                        <img src={require("../../media/ui/010-edit.svg")} alt="edit icon" />
+                                                        <MDBCardText className="user-text tools">
+                                                            <Link to={{
+                                                                pathname: '/users/profile',
+                                                                state: {
+                                                                    user: user
+                                                                }
+                                                            }}>
+                                                                <img src={require("../../media/ui/001-account.svg")} alt="edit icon" />
+                                                            </Link>
+                                                            <img src={require("../../media/ui/004-chat.svg")} alt="edit icon" />
+                                                            <img src={require("../../media/ui/010-edit.svg")} alt="edit icon" />
 
-                                                    </MDBCardText>
-                                                </MDBCardBody>
-                                            </MDBCard>
-                                        })
-                                        :
-                                        null}
-                                        <MDBBtn className="add-user rounded-pill float-right" color="primary" onClick={() => this.setState({ newUser: true })}>Přidat uživatele</MDBBtn>
+                                                        </MDBCardText>
+                                                    </MDBCardBody>
+                                                </MDBCard>
+                                            })
+                                            :
+                                            null}
+                                    </div>
                                 </section>
                             }
                         </CSSTransition>

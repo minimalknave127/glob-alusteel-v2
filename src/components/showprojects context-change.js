@@ -128,6 +128,7 @@ class ShowProjects extends React.Component{
     }
     render(){
         const { name, toggleTheme, isToggled } = this.context;
+        console.log("Toggeled: " + name);
         // const redirect = this.state.redirect.redirectMe;
         if(this.state.redirect.redirectMe){
                 return(
@@ -142,6 +143,8 @@ class ShowProjects extends React.Component{
         return(
             <React.Fragment>
                 <section className="mt-5">
+                    <button onClick={() => toggleTheme("new name")}>try me</button>
+                        <h1>{isToggled ? "yes" : "no"}</h1>
                     {(this.state.loadedItems.length > 0 ?
                     <div>
                             <MDBTable>
